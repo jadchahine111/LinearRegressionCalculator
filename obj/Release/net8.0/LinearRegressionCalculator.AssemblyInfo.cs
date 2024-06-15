@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LinearRegressionCalculator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0311aef647d72ec7d0c341dc6aad748ee545361")]
 [assembly: System.Reflection.AssemblyProductAttribute("LinearRegressionCalculator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LinearRegressionCalculator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
