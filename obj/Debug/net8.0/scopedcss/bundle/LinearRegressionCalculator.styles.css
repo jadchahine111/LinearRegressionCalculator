@@ -1,45 +1,46 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+/* _content/LinearRegressionCalculator/Pages/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-a.navbar-brand {
+a.navbar-brand[b-s11oy55qq6] {
     white-space: normal;
     text-align: center;
     word-break: break-all;
 }
 
-a {
+a[b-s11oy55qq6] {
     color: #0077cc;
 }
 
-.btn-primary {
+.btn-primary[b-s11oy55qq6] {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active[b-s11oy55qq6], .nav-pills .show > .nav-link[b-s11oy55qq6] {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
 
-.border-top {
+.border-top[b-s11oy55qq6] {
     border-top: 1px solid #e5e5e5;
 }
 
-.border-bottom {
+.border-bottom[b-s11oy55qq6] {
     border-bottom: 1px solid #e5e5e5;
 }
 
-.box-shadow {
+.box-shadow[b-s11oy55qq6] {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-button.accept-policy {
+button.accept-policy[b-s11oy55qq6] {
     font-size: 1rem;
     line-height: inherit;
 }
 
-.footer {
+.footer[b-s11oy55qq6] {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -47,14 +48,14 @@ button.accept-policy {
     line-height: 60px;
 }
 
-body {
+body[b-s11oy55qq6] {
     background: #e8cbc0;
     background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
     background: linear-gradient(to right, #e8cbc0, #636fa4);
     min-height: 100vh;
 }
 
-.social-link {
+.social-link[b-s11oy55qq6] {
     width: 30px;
     height: 30px;
     border: 1px solid #ddd;
@@ -67,7 +68,7 @@ body {
     font-size: 0.9rem;
 }
 
-    .social-link:hover, .social-link:focus {
+    .social-link:hover[b-s11oy55qq6], .social-link:focus[b-s11oy55qq6] {
         background: #ddd;
         text-decoration: none;
         color: #555;

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LinearRegressionCalculator.styles.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
@@ -23,7 +24,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Team">Team</a>
                         </li>
                     </ul>
                 </div>
@@ -36,11 +40,14 @@
         </main>
     </div>
 
+    @*
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - LinearRegressionCalculator - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
+
+    *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
