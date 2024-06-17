@@ -2,101 +2,82 @@
 {
     public class LinearRegression
     {
-        public Line Line { get; set; }
+        public Dataset Data { get; set; }
 
-        public LinearRegression(Line line)
+        public LinearRegression(Dataset data)
         {
-            this.Line = line;
+            Data = data;
         }
 
-        public double X_SUM()
+
+        /*      n(Σxy) - (Σx)(Σy)
+            a = -----------------
+                  n(Σx²) - (Σx)²
+        */
+        public double CalculateA()
         {
-            double sum = 0;
-            Line.Points.InOrderTraversal(point => sum += point.X);
-            return sum;
+            int n = Data.PointsCount;
+            double sumXY = Data.CalculateSumXY();
+            double sumX = Data.CalculateSumX();
+            double sumY = Data.CalculateSumY();
+            double sumX2 = Data.CalculateSumX2();
+
+            return (n * sumXY - sumX * sumY) / (n * sumX2 - Math.Pow(sumX, 2));
         }
 
-        public double Y_SUM()
+        /*
+             b = ȳ - ax̄
+        */
+        public double CalculateB()
         {
-            double sum = 0;
-            Line.Points.InOrderTraversal(point => sum += point.Y);
-            return sum;
+            return Data.CalculateAverageY() - CalculateA() * Data.CalculateAverageX();
         }
 
-        public double X2_SUM()
+        public double Predict(double x)
         {
-            double sum = 0;
-            Line.Points.InOrderTraversal(point => sum += (point.X * point.X));
-            return sum;
+            return CalculateA() * x + CalculateB();
         }
 
-        public double Y2_SUM()
+        // Draw line by calculate 3 or more points
+        public List<Point> DrawLine(int numberOfPoints = 100, double xStart = 0, double xEnd = 10)
         {
-            double sum = 0;
-            Line.Points.InOrderTraversal(point => sum += (point.Y * point.Y));
-            return sum;
-        }
+            List<Point> points = new List<Point>();
+            double step = (xEnd - xStart) / (numberOfPoints - 1);
 
-        public double XY_SUM()
-        {
-            double sum = 0;
-            Line.Points.InOrderTraversal(point => sum += (point.X * point.Y));
-            return sum;
-        }
-
-        public double X_AVERAGE()
-        {
-            int totalPoints = Line.Points.size;
-            if (totalPoints != 0)
+            for (int i = 0; i < numberOfPoints; i++)
             {
-                double average = X_SUM() / totalPoints;
-                return average;
+                double x = xStart + i * step;
+                double y = Predict(x);
+                points.Add(new Point(x, y));
             }
 
-            return Double.NaN;
+            return points;
         }
 
-        public double Y_AVERAGE()
+        public double SSE()
         {
-            int totalPoints = Line.Points.size;
-            if (totalPoints != 0)
+            double result = 0;
+            foreach (var point in Data.Points)
             {
-                double average = Y_SUM() / totalPoints;
-                return average;
+                result += Math.Pow((point.Y - Predict(point.X)), 2);
             }
-
-            return Double.NaN;
+            return result;
         }
 
-        // a0
-        public double A()
+        public double MSE()
         {
-            return Y_AVERAGE() - (B() * X_AVERAGE());
+            int n = Data.PointsCount;
+            return SSE() / n;
         }
 
-        // a1
-        public double B()
+        public double RMSE()
         {
-            int n = Line.Points.size;
-            return ((n * XY_SUM()) - (Y_SUM() * X_SUM())) / ((n * X2_SUM()) - (X_SUM() * X_SUM()));
+            return Math.Sqrt(MSE());
         }
 
-        public string DisplayLinearRegressionEquation()
+        public double NRMSE()
         {
-            double a0 = A();
-            double a1 = B();
-
-            return $"Y = {a1}X + {a0}";
-        }
-
-        public double PredicateValue(double X)
-        {
-            double a0 = A();
-            double a1 = B();
-
-            double Y = (a1 * X) + a0;
-
-            return Y;
+            return RMSE() / Data.CalculateAverageY();
         }
     }
 }

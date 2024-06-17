@@ -1,29 +1,28 @@
-﻿namespace LinearRegressionCalculator.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LinearRegressionCalculator.Models
 {
-    public class Point : IComparable<Point>
+    public class Point
     {
+        [Required]
+        [Display(Name = "X Value.")]
         public double X { get; set; }
+
+        [Required]
+        [Display(Name = "Y Value.")]
         public double Y { get; set; }
 
-        public Point(double X, double Y)
+        public Point(double x, double y)
         {
-            this.X = X;
-            this.Y = Y;
+            X = x;
+            Y = y;
         }
 
-        public int CompareTo(Point? other)
-        {
-            if (other == null)
-            {
-                return 1;
-            }
+        public Point() { }
 
-            int result = X.CompareTo(other.X);
-            if (result == 0)
-            {
-                result = Y.CompareTo(other.Y);
-            }
-            return result;
+        public string DisplayPoint()
+        {
+            return ($"({X},{Y})");
         }
     }
 }

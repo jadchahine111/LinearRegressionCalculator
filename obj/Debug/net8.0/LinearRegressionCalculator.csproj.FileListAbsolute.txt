@@ -29,3 +29,6 @@ C:\Users\Admin\source\repos\LinearRegressionCalculator\obj\Debug\net8.0\refint\L
 C:\Users\Admin\source\repos\LinearRegressionCalculator\obj\Debug\net8.0\LinearRegressionCalculator.pdb
 C:\Users\Admin\source\repos\LinearRegressionCalculator\obj\Debug\net8.0\LinearRegressionCalculator.genruntimeconfig.cache
 C:\Users\Admin\source\repos\LinearRegressionCalculator\obj\Debug\net8.0\ref\LinearRegressionCalculator.dll
+C:\Users\Admin\source\repos\LinearRegressionCalculator\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Admin\source\repos\LinearRegressionCalculator\obj\Debug\net8.0\LinearRegressionCalculator.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\LinearRegressionCalculator\obj\Debug\net8.0\LinearRe.50247ED1.Up2Date

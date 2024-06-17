@@ -1,43 +1,61 @@
 using LinearRegressionCalculator.Models;
+using LinearRegressionCalculator.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 
 namespace LinearRegressionCalculator.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly IUserService _userService;
 
-        public List<Point> Coordinates { get; set; } = new List<Point>();
-        public Line Line { get; set; }
-        
-        public LinearRegression linearRegression { get; set; }
-
-
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IUserService userService)
         {
-            _logger = logger;
+            _userService = userService;
         }
 
-        public void OnGet()
+        [BindProperty]
+        public List<Point> Points { get; set; } = new List<Point>();
+
+        public string LineData { get; set; }
+        public string PointsData { get; set; }
+
+        public double A { get; set; }
+        public double B { get; set; }
+
+        public double NRMSE { get; set; }
+
+        public Table Table { get; set; } = new Table();
+
+        public void OnPost()
         {
+            var dataset = new Dataset();
 
-        }
-
-        public IActionResult OnPost(List<Point> coordinates)
-        {
-            Coordinates = coordinates;
-
-            // Add each coordinate as a point to the Line
-            foreach (var point in coordinates)
+            foreach (var point in Points)
             {
-                Line.AddPoint(point);
+                dataset.AddPoint(new Point(point.X, point.Y));
             }
-            linearRegression.Line = Line;
-            double a0 = linearRegression.B();
-            double a1 = linearRegression.A();
-            return Page();
+
+            if (dataset.PointsCount >= 2)
+            {
+
+                Table = _userService.CreateTable(dataset);
+
+                LinearRegression lr = new LinearRegression(dataset);
+
+                A = lr.CalculateA();
+                B = lr.CalculateB();
+
+                NRMSE = lr.NRMSE();
+
+                var lineData = Table.GetLinePoints().Select(p => new { x = p.X, y = p.Y }).ToList();
+                LineData = JsonConvert.SerializeObject(lineData);
+
+                var pointsData = Table.GetDataPoints().Select(p => new { x = p.X, y = p.Y }).ToList();
+                PointsData = JsonConvert.SerializeObject(pointsData);
+
+            }
         }
     }
 }

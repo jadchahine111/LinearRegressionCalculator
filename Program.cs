@@ -1,3 +1,6 @@
+using LinearRegressionCalculator.Services;
+using LinearRegressionSimulation.Services;
+
 namespace LinearRegressionCalculator
 {
     public class Program
@@ -8,6 +11,8 @@ namespace LinearRegressionCalculator
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 

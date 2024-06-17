@@ -1,57 +1,154 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Coordinate Simulation";
+    ViewData["Title"] = "Home page";
 }
 
-<div class="container mt-4">
-    <h2>Enter Coordinates</h2>
+<div class="container mt-5">
+    <h2>@ViewData["Title"]</h2>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">X Coordinate</th>
-                <th scope="col">Y Coordinate</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody id="coordinateTable">
-            @foreach (var coordinate in Model.Coordinates)
+    <form method="post">
+        <div id="pointsContainer">
+            @for (int i = 0; i < Model.Points.Count; i++)
             {
-                <tr>
-                    <td><input type="number" class="form-control" name="xCoord" value="@coordinate.X" /></td>
-                    <td><input type="number" class="form-control" name="yCoord" value="@coordinate.Y" /></td>
-                    <td><button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button></td>
-                </tr>
+                <div class="form-group row mb-3">
+                    <div class="col-md-5">
+                        <input type="number" step="any" class="form-control" name="Points[@i].X" value="@Model.Points[i].X" placeholder="X value" required />
+                    </div>
+                    <div class="col-md-5">
+                        <input type="number" step="any" class="form-control" name="Points[@i].Y" value="@Model.Points[i].Y" placeholder="Y value" required />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" onclick="removePoint(this)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="addPoint()">Add Point</button>
+        <button type="submit" class="btn btn-success">Generate Chart</button>
+    </form>
 
-    <button class="btn btn-primary mt-3" onclick="addRow()">Add Row</button>
-    <button class="btn btn-success mt-3" onclick="simulate()">Simulate</button>
+    <div class="mt-5">
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+
+    <div class="mt-5">
+        <h3>Regression Equation</h3>
+        <div class="custom_font">
+            <p class="equation-coefficients">A = @Model.A,</p>
+            <p class="equation-coefficients">B = @Model.B</p>
+            <div class="equation-container">
+                <p class="equation">Y = @Model.A X + @Model.B</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mt-5">
+        <h3>Data Table</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>XY</th>
+                    <th>X²</th>
+                    <th>Ŷ</th>
+                    <th>|e|</th>
+                    <th>|e²|</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.Table.Rows)
+                {
+                    <tr>
+                        <td>@row.X</td>
+                        <td>@row.Y</td>
+                        <td>@row.XY</td>
+                        <td>@row.X2</td>
+                        <td>@row.YHat</td>
+                        <td>@row.E</td>
+                        <td>@row.E2</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script>
-        function addRow() {
-            var table = document.getElementById("coordinateTable");
-            var row = table.insertRow();
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            cell1.innerHTML = '<input type="number" class="form-control" name="xCoord" />';
-            cell2.innerHTML = '<input type="number" class="form-control" name="yCoord" />';
-            cell3.innerHTML = '<button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">Delete</button>';
+        function addPoint() {
+            var pointsContainer = document.getElementById('pointsContainer');
+            var index = pointsContainer.children.length;
+            var pointRow = `
+                                <div class="form-group row mb-3">
+                                    <div class="col-md-5">
+                                        <input type="number" step="any" class="form-control" name="Points[${index}].X" placeholder="X value" required />
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="number" step="any" class="form-control" name="Points[${index}].Y" placeholder="Y value" required />
+                                    </div>
+                                    <div class="col-md-2">
+                                                <button type="button" class="btn btn-danger" onclick="removePoint(this)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            `;
+            pointsContainer.insertAdjacentHTML('beforeend', pointRow);
         }
 
-        function deleteRow(btn) {
-            var row = btn.parentNode.parentNode;
-            row.parentNode.removeChild(row);
+        function removePoint(button) {
+            button.closest('.form-group').remove();
         }
 
-        function simulate() {
-            // Add your simulation logic here
-            alert('Simulation button clicked!');
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            var pointsData = @Html.Raw(Model.PointsData ?? "[]");
+            var lineData = @Html.Raw(Model.LineData ?? "[]");
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            var chart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Data Points',
+                            data: pointsData,
+                            backgroundColor: 'red',
+                            showLine: false,
+                        },
+                        {
+                            label: 'Linear Regression Line',
+                            data: lineData,
+                            pointRadius: 0,
+                            borderColor: 'blue',
+                            fill: false,
+                            showLine: true,
+                            borderWidth: 2,
+                            type: 'line'
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'linear',
+                            position: 'bottom',
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'X Axis'
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Y Axis'
+                            }
+                        }]
+                    }
+                }
+            });
+        });
     </script>
 }
