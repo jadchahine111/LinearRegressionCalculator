@@ -2,3 +2,46 @@
 @model LinearRegressionCalculator.Pages.LinearSystemsModel
 @{
 }
+
+<h1>Select Type</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Iterative Methods Card -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white text-center">
+                    Iterative Methods
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Methods that approximate solutions through iterative processes.
+                    </p>
+                    <div class="list-group">
+                        <a href="/JacobiMethod" class="list-group-item list-group-item-action">Jacobi Method</a>
+                        <a href="/GaussSeidelMethod" class="list-group-item list-group-item-action">Gauss-Seidel Method</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Direct Methods Card -->
+        <div class="col-md-6 mb-3">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white text-center">
+                    Direct Methods
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Methods that provide exact solutions in a finite number of steps.
+                    </p>
+                    <div class="list-group">
+                        <a href="/GaussElimination" class="list-group-item list-group-item-action">Gauss Elimination</a>
+                        <a href="/PartialPivoting" class="list-group-item list-group-item-action">Partial Pivoting</a>
+                        <a href="/GaussJordanMethod" class="list-group-item list-group-item-action">Gauss-Jordan Method</a>
+                        <a href="/LUDecomposition" class="list-group-item list-group-item-action">LU Decomposition</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
