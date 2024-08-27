@@ -22,12 +22,32 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/Derivation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVyaXZhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/Integration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW50ZWdyYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/LinearSystems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGluZWFyU3lzdGVtcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/NonlinearProblems.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm9ubGluZWFyUHJvYmxlbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/Optimization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3B0aW1pemF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/source/repos/LinearRegressionCalculator/Pages/Shared/_ValidationScriptsPartial.cshtml]
